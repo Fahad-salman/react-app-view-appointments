@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from 'react';
+import { person } from './Component/AppointmentsData';
+import { Container } from 'react-bootstrap';
+import AppointmentsCounts from './Component/AppointmentsCounts';
+import AppointmentsList from './Component/AppointmentsList';
+import AppointmentsAction from './Component/AppointmentsAction';
+
 
 function App() {
+  const [appointmentData, setAppointmentData] = useState(person);
+  useEffect(() => {
+    setAppointmentData([])
+  }, [])
+  const onDelete = () => {
+    setAppointmentData([])
+  }
+  const showDate = () => {
+    setAppointmentData(person)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='font background'>
+      <Container className='py-5'>
+        <AppointmentsCounts person={appointmentData} />
+        <AppointmentsList person={appointmentData} />
+        <AppointmentsAction onDelete={onDelete} showDate={showDate} />
+      </Container>
     </div>
   );
 }
